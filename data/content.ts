@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: "Mitra Sembako IDN",
   whatsappNumber: "6285822401488", // Ganti nomor disini
   email: "official@mitrasembakoidn.com",
-  address: "M8JW+8M8 UPT Disdukcapil Lampung Selatan, Marga Agung, Jati Agung, South Lampung Regency, Lampung 35365",
+  address: "Disdukcapil Lampung Selatan, Marga Agung, Jati Agung, South Lampung Regency, Lampung 35365",
 
 };
 
