@@ -1,8 +1,8 @@
 export const SITE_CONFIG = {
   name: "Mitra Sembako IDN",
-  whatsappNumber: "6285750888471", // Ganti nomor disini
-  email: "admin@mitrasembakoidn.com",
-  address: "alan Jend Sudirman No.3.5, Palembang, Sumatera Selatan, Indonesia",
+  whatsappNumber: "6285822401488", // Ganti nomor disini
+  email: "official@mitrasembakoidn.com",
+  address: "M8JW+8M8 UPT Disdukcapil Lampung Selatan, Marga Agung, Jati Agung, South Lampung Regency, Lampung 35365",
 
 };
 

@@ -52,6 +52,12 @@ export default function Footer() {
                 {SITE_CONFIG.whatsappNumber}
               </a>
             </li>
+            <li>
+              Alamat: <p>{SITE_CONFIG.address}</p>
+            </li>
+            <li>
+              Email: <p>{SITE_CONFIG.email}</p>
+            </li>
           </ul>
         </div>
       </div>
