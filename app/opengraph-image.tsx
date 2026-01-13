@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ImageResponse } from 'next/og';
 
 // Route segment config
@@ -16,10 +18,17 @@ export default async function Image() {
   // Warna Utama Template
   const brandColor = '#B67529';
 
-  // URL Placeholder Gambar (Ganti ini dengan URL gambar keranjang/logo asli Anda)
-  // Pastikan URL gambar adalah Absolute URL (https://...)
-  const cartImageUrl =
-    'https://cdn.study-w-ar.space/assets/about-mitrasembako.jpg';
+  // URL Gambar
+  const imageUrl = 'https://cdn.study-w-ar.space/assets/about-mitrasembako.jpg';
+
+  // --- SOLUSI: FETCH MANUAL GAMBAR ---
+  // Kita fetch dulu gambarnya menjadi ArrayBuffer agar Next.js bisa membacanya dengan pasti
+  const imageBuffer = await fetch(imageUrl).then((res) => {
+    if (!res.ok) {
+      throw new Error('Gagal mengambil gambar');
+    }
+    return res.arrayBuffer();
+  });
 
   return new ImageResponse(
     (
@@ -38,7 +47,7 @@ export default async function Image() {
           backgroundSize: '100px 100px',
           fontFamily: 'sans-serif',
         }}>
-        {/* Dekorasi Background Circle - Disesuaikan agar harmonis dengan #B67529 */}
+        {/* Dekorasi Background Circle */}
         <div
           style={{
             position: 'absolute',
@@ -47,7 +56,7 @@ export default async function Image() {
             height: '400px',
             width: '400px',
             borderRadius: '100%',
-            background: 'rgba(182, 117, 41, 0.15)', // Varian transparan dari #B67529
+            background: 'rgba(182, 117, 41, 0.15)',
             filter: 'blur(80px)',
           }}
         />
@@ -59,7 +68,7 @@ export default async function Image() {
             height: '300px',
             width: '300px',
             borderRadius: '100%',
-            background: 'rgba(249, 115, 22, 0.1)', // Orange tipis (tetap masuk)
+            background: 'rgba(249, 115, 22, 0.1)',
             filter: 'blur(80px)',
           }}
         />
@@ -73,17 +82,20 @@ export default async function Image() {
             marginBottom: '40px',
             padding: '20px',
             borderRadius: '24px',
-            // Shadow diubah dari hijau ke nuansa coklat/orange gelap
             boxShadow: '0 10px 30px rgba(182, 117, 41, 0.4)',
+            background: 'white', // Opsional: Tambah background putih jika gambar transparan/jika ingin border
           }}>
-          {/* GANTI SVG DENGAN IMAGE */}
+          {/* Gunakan buffer yang sudah di-fetch sebagai src.
+             (Typecasting 'as any' kadang diperlukan di TS jika linter protes soal ArrayBuffer di src, 
+             tapi secara runtime ini valid di next/og) 
+          */}
           <img
-            src={cartImageUrl}
+            src={imageBuffer as any}
             width='200'
             height='200'
             style={{
-              objectFit: 'contain',
-              borderRadius: '16px', // Opsional: jika ingin sedikit rounded
+              objectFit: 'cover', // Gunakan cover agar rapi mengisi kotak
+              borderRadius: '16px',
             }}
           />
         </div>
@@ -121,12 +133,11 @@ export default async function Image() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            // Background diubah dari Hijau Mint (#F0FDF4) ke Cream/Light Orange (#fff7ed) agar harmonis
             background: '#fff7ed',
             border: `2px solid ${brandColor}`,
             padding: '12px 32px',
             borderRadius: '50px',
-            color: brandColor, // Text disamakan dengan warna border (#B67529)
+            color: brandColor,
             fontSize: 24,
             fontWeight: 600,
           }}>
