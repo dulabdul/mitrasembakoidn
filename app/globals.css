@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand Colors - Modern Grocery Theme */
+
+  /* Primary Base */
+  --color-primary: #B67529;
+
+  /* Primary Variations (Derived from Primary) */
+  --color-primary-light: #D9A35A;   /* hover / highlight */
+  --color-primary-soft: #F3E6D4;    /* badge / background soft */
+  --color-primary-dark: #8A5418;    /* active / emphasis */
+  --color-primary-darker: #5E3A10;  /* strong contrast / footer */
+
+  /* Secondary & Accent (Still Harmonized) */
+  --color-secondary: #F97316;
+  --color-secondary-soft: #FFE4CC;
+
+  --color-accent: #FEF3C7;
+
+  /* Backgrounds */
+  --color-background: #F8FAFC;
+  --color-background-warm: #FBF6EF;
+
+  /* Text */
+  --color-text-main: #1E293B;
+  --color-text-muted: #64748B;
+  --color-text-on-primary: #FFFFFF;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Custom Utilities */
+@layer utilities {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24;
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-background text-text-main antialiased;
 }
