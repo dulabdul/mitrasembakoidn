@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
@@ -7,14 +7,15 @@ import FloatingButtons from '@/components/ui/FloatingButton';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-// URL Website Anda (Pastikan konsisten pakai www atau tidak)
-const BASE_URL = 'https://www.mitrasembakoidn.com';
+export const viewport: Viewport = {
+  themeColor: '#FF5722', // Warna Shopee Orange di browser mobile
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
-  // 1. MetadataBase: Wajib ada agar opengraph-image.tsx terbaca
-  metadataBase: new URL(BASE_URL),
-
-  // 2. Judul & Deskripsi Utama
+  metadataBase: new URL('https://www.mitrasembakoidn.com'), // Ganti dengan domain asli nanti
   title: {
     default: 'Mitra Sembako IDN | Pusat Toko Sembako Murah & Terpercaya',
     template: '%s | Mitra Sembako IDN', // Jika di halaman lain ada title berbeda
@@ -22,38 +23,58 @@ export const metadata: Metadata = {
   description:
     'Pusat Toko Sembako Murah & Terpercaya dan terpercaya di Indonesia. Melayani pengiriman beras, minyak, gula, dan kebutuhan pokok lainnya.',
 
-  // 3. OpenGraph (Facebook, WA, LinkedIn)
+  keywords: [
+    'Toko sembako',
+    'toko sembako murah',
+    'Toko sembako terpercaya',
+    'gratis ongkir Toko sembako',
+  ],
+  authors: [{ name: 'Mitra Sembako Admin' }],
+  creator: 'Mitra Sembako',
+  publisher: 'Mitra Sembako',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: 'Mitra Sembako IDN - Pusat Toko Sembako Murah & Terpercaya',
+    title: 'Mitra Sembako IDN | Pusat Toko Sembako Murah & Terpercaya',
     description:
-      'Belanja kebutuhan pokok harga grosir termurah disini. Siap antar ke seluruh Indonesia.',
-    url: BASE_URL,
+      'Pusat Toko Sembako Murah & Terpercaya dan terpercaya di Indonesia. Melayani pengiriman beras, minyak, gula, dan kebutuhan pokok lainnya.',
+
+    url: 'https://www.mitrasembakoidn.com',
     siteName: 'Mitra Sembako IDN',
     locale: 'id_ID',
     type: 'website',
-    // Catatan: 'images' tidak perlu ditulis disini karena sudah ada opengraph-image.tsx
+    images: [
+      {
+        url: '/images/hero.jpg', // Pastikan buat gambar ini (1200x630px)
+        width: 1200,
+        height: 630,
+        alt: 'Mitra Sembako IDN',
+      },
+    ],
   },
-
-  // 4. Twitter Card (Penting agar tampilan di Twitter/X besar)
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Mitra Sembako IDN - Grosir Sembako',
-    description: 'Pusat Toko Sembako Murah & Terpercaya dan terpercaya.',
-    // Twitter akan otomatis fallback mengambil gambar dari OpenGraph jika tidak didefinisikan spesifik
-  },
-
-  // 5. Canonical URL (SEO Best Practice)
-  alternates: {
-    canonical: BASE_URL,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
+    // Set bahasa ke Malay (Malaysia)
     <html
       lang='id'
       className='scroll-smooth'>
